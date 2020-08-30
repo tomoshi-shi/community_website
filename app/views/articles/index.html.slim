@@ -1,0 +1,29 @@
+- model_class = Article
+.page-header
+  h1
+    | 記事一覧 - #{@article_series_name}
+table.table.table-striped
+  thead
+    tr
+      th
+        | タイトル
+      th
+        | 書き出し
+      th
+        | 公開日
+      th
+  tbody
+    - @articles.each do |article|
+      tr
+        td
+          = article.title
+        td
+          / 先頭20文字のみ抜き出し
+          = article.sentence[0, 20]
+        td
+          - if article.published_at.present?
+            = article.published_at.strftime("%Y/%m/%d %H:%M")
+          - else
+            = article.updated_at.strftime("%Y/%m/%d %H:%M")
+        td
+          = link_to "本文へ", article_path(article)

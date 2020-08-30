@@ -1,0 +1,42 @@
+= form_for @article, :html => { :class => "form-horizontal article" } do |f|
+  - if @article.errors.any?
+    #error_expl.panel.panel-danger
+      .panel-heading
+        h3.panel-title
+          = pluralize(@article.errors.count, "error")
+          |  prohibited this article from being saved:
+      .panel-body
+        ul
+          - @article.errors.full_messages.each do |msg|
+            li
+              = msg
+  .form-group
+    = f.label :article_series_id, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :article_series_id, :class => 'form-control'
+    =f.error_span(:article_series_id)
+  .form-group
+    = f.label :title, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :title, :class => 'form-control'
+    =f.error_span(:title)
+  .form-group
+    = f.label :sentence, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :sentence, :class => 'form-control'
+    =f.error_span(:sentence)
+  .form-group
+    = f.label :publish_status, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :publish_status, :class => 'form-control'
+    =f.error_span(:publish_status)
+  .form-group
+    = f.label :published_at, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :published_at, :class => 'form-control'
+    =f.error_span(:published_at)
+  .form-group
+    .col-lg-offset-2.col-lg-10
+      = f.submit nil, :class => 'btn btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")),
+      -                 articles_path, :class => 'btn btn-default'

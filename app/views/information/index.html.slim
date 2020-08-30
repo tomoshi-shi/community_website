@@ -1,0 +1,30 @@
+- model_class = Information
+.page-header
+  h1
+    | お知らせ
+
+table.table.table-striped
+  thead
+    tr
+      th
+        | カテゴリ
+      th
+        | タイトル
+      th
+        | お知らせ内容
+      th
+        | 更新日
+  tbody
+    - @information.each do |information|
+      tr
+        td
+          = information.information_category.name
+        td
+          = information.title
+        td
+          = information.scentence
+        td
+          - if information.published_at.present?
+            = information.published_at.strftime("%Y/%m/%d %H:%M")
+          - else
+            = information.updated_at.strftime("%Y/%m/%d %H:%M")

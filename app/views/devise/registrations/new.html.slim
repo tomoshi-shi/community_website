@@ -1,0 +1,23 @@
+.page-header
+  h1
+    | アカウント作成
+= form_for(resource, as: resource_name, url: registration_path(resource_name), data: {remote: false}) do |f|
+  = f.hidden_field :minimum_password_length, :value => @minimum_password_length
+  .field
+    = f.label :email, "メールアドレス"
+    = f.email_field :email, autofocus: true, autocomplete: "email"
+  .field
+    = f.label :password, "パスワード"
+    - if @minimum_password_length
+      em
+        | (
+        = @minimum_password_length
+        | 文字以上)
+    br
+    = f.password_field :password, autocomplete: "new-password"
+  .field
+    = f.label :password_confirmation, "パスワード再入力"
+    = f.password_field :password_confirmation, autocomplete: "new-password"
+  .actions
+    = f.submit "アカウント作成"
+= render "devise/shared/links"

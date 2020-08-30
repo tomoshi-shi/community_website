@@ -1,0 +1,29 @@
+LOG:  database system was shut down at 2020-08-29 02:00:08 JST
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+FATAL:  role "postgres" does not exist
+FATAL:  database "db" does not exist
+FATAL:  database "community_development" does not exist
+ERROR:  function gen_random_uuid() does not exist
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+STATEMENT:  CREATE TABLE "user_groups" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "user_id" bigint NOT NULL, "group_id" uuid NOT NULL, "belonging_type" integer NOT NULL, "start_date" date, "end_date" date, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)
+ERROR:  relation "groups" does not exist
+STATEMENT:  ALTER TABLE "user_groups" ADD CONSTRAINT "fk_rails_6d478d2f65"
+	FOREIGN KEY ("group_id")
+	  REFERENCES "groups" ("id")
+	
+ERROR:  relation "groups" does not exist
+STATEMENT:  ALTER TABLE "user_groups" ADD CONSTRAINT "fk_rails_6d478d2f65"
+	FOREIGN KEY ("group_id")
+	  REFERENCES "groups" ("id")
+	
+ERROR:  cannot drop table groups because other objects depend on it
+DETAIL:  constraint fk_rails_a3d5742497 on table projects depends on table groups
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+STATEMENT:  DROP TABLE "groups"
+ERROR:  null value in column "created_at" violates not-null constraint
+DETAIL:  Failing row contains (054ab5c3-eb82-4eb8-ade7-bae4114a463a, null, null, あ, い, 2020-01-10, null, f, null, null).
+STATEMENT:  BEGIN;
+	INSERT INTO "public"."projects"("name", "summary", "start_date") VALUES('あ', 'い', '2020-01-10') RETURNING "id", "group_id", "parent_id", "name", "summary", "start_date", "end_date", "closed", "created_at", "updated_at";
+	

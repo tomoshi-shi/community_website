@@ -1,0 +1,51 @@
+= form_for @user, html: { class: "form form-horizontal user" } do |f|
+  .form-group
+    .col-lg-10
+      h4 登録情報確認・変更
+
+  .form-group
+    = f.label :email, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :email, value: @user.email, :class => 'form-control'
+  .form-group
+    = f.label :last_name, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :last_name, value: @user.last_name, :class => 'form-control'
+  .form-group
+    = f.label :first_name, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :first_name, value: @user.first_name, :class => 'form-control'
+  .form-group
+    = f.label :last_name_initial, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :last_name_initial, value: @user.last_name_initial, :class => 'form-control'
+  .form-group
+    = f.label :first_name_initial, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :first_name_initial, value: @user.first_name_initial, :class => 'form-control'
+
+  hr
+
+  .form-group
+    .col-lg-10
+      h4 パスワード変更(更新時のみ入力)
+
+  .form-group
+    = f.label :current_password, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.password_field :current_password, :class => 'form-control'
+    = f.error_span(:current_password)
+  .form-group
+    = f.label :password, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.password_field :password, :class => 'form-control'
+    = f.error_span(:password)
+  .form-group
+    = f.label :password_confirmation, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.password_field :password_confirmation, :class => 'form-control'
+    = f.error_span(:password_confirmation)
+
+  .form-group
+    .col-lg-10
+      = f.submit '更新', :class => 'btn btn-primary'

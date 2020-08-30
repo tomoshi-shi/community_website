@@ -1,0 +1,21 @@
+- model_class = ArticleSeries
+.page-header
+  h1
+    | 新着記事
+table.table.table-striped
+  thead
+    tr
+      th
+        | シリーズ
+      th
+        | 概要
+      th
+  tbody
+    - @article_series.each do |article_series|
+      tr
+        td
+          = article_series.name
+        td
+          = article_series.summary
+        td
+          = link_to "記事一覧", controller: :articles, action: :index, article_series_id: article_series.id

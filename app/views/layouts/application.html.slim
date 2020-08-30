@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title
+      | コミュニティ
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+  body
+    / ログイン画面以外(ログイン中)のみリンクを表示
+    - if current_user.present?
+      = link_to "お知らせ", information_index_path
+      span &nbsp-&nbsp
+      = link_to "新着記事", article_series_index_path
+      span &nbsp-&nbsp
+      = link_to "プロジェクト", projects_path
+      span &nbsp-&nbsp
+      = link_to "リンク", links_path
+      span &nbsp-&nbsp
+      = link_to "アカウント管理", users_path
+      span &nbsp-&nbsp
+      = link_to "ログアウト", destroy_user_session_path, method: :delete
+
+    / 画面上部に表示するflashの設定
+    - flash.each do |name, msg|
+      - if name == "notice"
+        div.alert.alert-success
+          = msg
+      - else
+        div.alert.alert-danger
+          = msg
+    = yield

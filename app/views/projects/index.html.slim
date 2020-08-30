@@ -1,0 +1,52 @@
+- model_class = Project
+.page-header
+  h1
+    | プロジェクト
+table.table.table-striped
+  thead
+    tr
+      th
+        | プロジェクト名
+      th
+        | 概要
+      th
+        | 開始日
+      th
+        | 終了予定日
+      th
+  tbody
+    - @projects.each do |project|
+      tr
+        td
+          = project.name
+        td
+          = project.summary
+        td
+          = project.start_date.strftime("%Y/%m/%d")
+        td
+          - if project.end_date.present?
+            = project.end_date.strftime("%Y/%m/%d")
+          - else
+            | (未設定)
+        td
+          = link_to "投稿一覧", project_path(project)
+
+hr
+
+h4 新規プロジェクト作成
+
+= form_for @project do |f|
+  .form-group
+    = f.label 'プロジェクト名', :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :name, :class => 'form-control'
+    = f.label '概要', :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :summary, :class => 'form-control'
+    = f.label '開始日', :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.date_field :start_date, :class => 'form-control'
+    = f.label '終了予定日(未入力可)', :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.date_field :end_date, placeholder: '未入力可', :class => 'form-control'
+    = submit_tag "作成", class: 'btn btn-primary'

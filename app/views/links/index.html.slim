@@ -1,0 +1,18 @@
+- model_class = Link
+.page-header
+  h1
+    | リンク
+
+- @link_categories.each do |link_category|
+  b
+    = link_category.name
+  ul
+    - LinkCategory.get_links(link_category).each do |link|
+      li
+        = link.name
+        - if link.note.present?
+          br
+          = link.note
+        - if link.url.present?
+          br
+          a href="#{link.url}" target="_blank" #{link.url}

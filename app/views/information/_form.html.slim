@@ -1,0 +1,42 @@
+= form_for @information, :html => { :class => "form-horizontal information" } do |f|
+  - if @information.errors.any?
+    #error_expl.panel.panel-danger
+      .panel-heading
+        h3.panel-title
+          = pluralize(@information.errors.count, "error")
+          |  prohibited this information from being saved:
+      .panel-body
+        ul
+          - @information.errors.full_messages.each do |msg|
+            li
+              = msg
+  .form-group
+    = f.label :information_category_id, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :information_category_id, :class => 'form-control'
+    =f.error_span(:information_category_id)
+  .form-group
+    = f.label :title, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :title, :class => 'form-control'
+    =f.error_span(:title)
+  .form-group
+    = f.label :scentence, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :scentence, :class => 'form-control'
+    =f.error_span(:scentence)
+  .form-group
+    = f.label :publish_status, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :publish_status, :class => 'form-control'
+    =f.error_span(:publish_status)
+  .form-group
+    = f.label :published_at, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :published_at, :class => 'form-control'
+    =f.error_span(:published_at)
+  .form-group
+    .col-lg-offset-2.col-lg-10
+      = f.submit nil, :class => 'btn btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")),
+      -                 information_index_path, :class => 'btn btn-default'

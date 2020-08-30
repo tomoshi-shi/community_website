@@ -1,0 +1,39 @@
+- model_class = Project
+.page-header
+  h1
+    | プロジェクト - #{@project.name}
+
+= form_tag projects_create_project_status_path, method: :create_project_status
+  = hidden_field_tag :id, @project.id
+  = text_area_tag :status, nil, placeholder: "状況を入力してください", size: "50x5"
+  br
+  = submit_tag "投稿", class: 'btn btn-primary'
+
+br
+
+table.table.table-striped
+  thead
+    tr
+      th
+        | 状況
+      th
+        | 投稿者
+      th
+        | 更新日時
+      th
+  tbody
+    - @project_statuses.each do |project_status|
+      tr
+        td
+          = project_status.status
+        td
+          | #{project_status.user.last_name} #{project_status.user.first_name}
+        td
+          = project_status.updated_at.strftime("%Y/%m/%d %H:%M")
+        td
+          - if current_user.id == project_status.user_id
+            = link_to '削除',
+                            projects_destroy_project_status_path(@project, id: @project.id, project_status_id: project_status.id),
+                            method: :destroy_project_status,
+                            data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: '投稿を削除します。よろしいですか？')) },
+                            class: 'btn btn-danger'

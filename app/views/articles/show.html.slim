@@ -1,0 +1,6 @@
+- model_class = Article
+.page-header
+  h1
+    | #{@article.article_series.name} - #{@article.title}
+
+= @article.sentence

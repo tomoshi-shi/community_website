@@ -1,0 +1,23 @@
+h2
+  | パスワード再発行
+= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }, data: {remote: false}) do |f|
+  = render "devise/shared/error_messages", resource: resource
+  = f.hidden_field :reset_password_token
+  = f.hidden_field :minimum_password_length, :value => @minimum_password_length
+  .field
+    = f.label :password, "新しいパスワード"
+    br
+    - if @minimum_password_length
+      em
+        | (
+        = @minimum_password_length
+        |  文字以上)
+      br
+    = f.password_field :password, autofocus: true, autocomplete: "new-password"
+  .field
+    = f.label :password_confirmation, "新しいパスワード 再入力"
+    br
+    = f.password_field :password_confirmation, autocomplete: "new-password"
+  .actions
+    = f.submit "パスワード変更"
+/ = render "devise/shared/links"
