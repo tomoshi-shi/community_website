@@ -1,0 +1,2 @@
+# community_website
+グループや社内の情報共有を目的としたWebサイト
