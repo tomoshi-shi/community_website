@@ -6,7 +6,6 @@ class LinksController < ApplicationController
   # GET /links.json
   def index
     @link_categories = LinkCategory.order(:disp_order, :created_at)
-    puts @link_categories.inspect
   end
 
   # GET /links/1

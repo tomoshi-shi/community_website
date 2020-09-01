@@ -16,6 +16,9 @@ class Users::PasswordsController < Devise::PasswordsController
     if email !~ /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
       flash[:error] = "メールアドレスが正しくありません"
       redirect_to new_user_password_path
+    elsif User.where(email: email).length == 0
+      flash[:error] = "メールアドレスを正しく入力してください"
+      redirect_to new_user_password_path
     else
       # 入力チェックに問題がない場合、パスワード再発行処理呼び出し
       super
@@ -54,13 +57,10 @@ class Users::PasswordsController < Devise::PasswordsController
   protected
 
   def after_resetting_password_path_for(resource)
-    puts "after_resetting_password_path_for"
     user_session_path
   end
 
-  The path used after sending reset password instructions
   def after_sending_reset_password_instructions_path_for(resource_name)
-    puts "after_sending_reset_password_instructions_path_for"
     user_session_path
   end
 end

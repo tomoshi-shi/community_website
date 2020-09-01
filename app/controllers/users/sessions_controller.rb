@@ -30,18 +30,15 @@ class Users::SessionsController < Devise::SessionsController
 
   # ログイン処理後の遷移先
   def after_sign_in_path_for(resource)
-    puts "after_sign_in_path_for"
     information_index_path
   end
 
   def after_inactive_sign_in_path_for(resource)
-    puts "after_inactive_sign_in_path_for"
     user_session_path
   end
 
   # ログアウト処理後の遷移先
   def after_sign_out_path_for(resource)
-    puts "after_sign_out_path_for"
     user_session_path
   end
 end

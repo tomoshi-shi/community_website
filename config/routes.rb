@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # メーラーの設定
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  
   get '__healthcheck', to: 'healthcheck#show'
 
   root to: 'pages#home'

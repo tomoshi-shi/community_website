@@ -74,3 +74,7 @@ gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'font-awesome-rails'
+
+group :development do
+  gem 'letter_opener_web', '~> 1.0'
+end

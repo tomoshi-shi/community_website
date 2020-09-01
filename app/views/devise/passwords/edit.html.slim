@@ -6,7 +6,6 @@ h2
   = f.hidden_field :minimum_password_length, :value => @minimum_password_length
   .field
     = f.label :password, "新しいパスワード"
-    br
     - if @minimum_password_length
       em
         | (
@@ -16,7 +15,6 @@ h2
     = f.password_field :password, autofocus: true, autocomplete: "new-password"
   .field
     = f.label :password_confirmation, "新しいパスワード 再入力"
-    br
     = f.password_field :password_confirmation, autocomplete: "new-password"
   .actions
     = f.submit "パスワード変更"
